@@ -1,3 +1,22 @@
+<h1>添加文章</h1>
+
+<form action="/posts/add" method="post">
+
+TITLE:
+<input name="title"  />
+<br/><br/>
+CATEGORY:
+<%@categories.each do |item|%>
+<label><input type="radio" name="category_id" value="<%=item.id%>"/><%=item.title%></label>
+&nbsp;
+<%end%>
+<label><input type="radio" name="category_id" value="34"/>lhdsfsdf;</label>
+
+<br/><br/>
+<input type="submit" value="CREATE"/>
+</form>
+
+
 <hr>
 <h1>添加分类</h1>
 
@@ -26,8 +45,6 @@
 	<td><%=item['sort']%></td>
 	<td><%=item['created_at']%></td>
 	<td><%=item['updated_at']%></td>
-	<td>
-		<a href="/category/posts/<%=item['id']%>">posts</a>&nbsp;
 	<td>
 		<a href="/category/edit/<%=item['id']%>">edit</a>&nbsp;
 		<a href="/category/del/<%=item['id']%>">del</a>

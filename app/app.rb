@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 require 'sinatra'
 require 'active_record'
+require 'awesome_print'
 
 
 require File.expand_path("models.rb")
 
 
+ActiveRecord::Base.default_timezone = :local
 dbconfig = YAML::load(File.open('config/database.yml'))
 ActiveRecord::Base.establish_connection(dbconfig)
 
@@ -17,6 +19,7 @@ get '/' do
 end
 get '/category' do
 	@categories = Category.all.order("sort")
+	ap @categories
 	erb :index
 end
 
@@ -53,3 +56,59 @@ get '/category/del/:id' do
 		redirect "/category"
 	end
 end
+
+get '/posts/new' do
+	@categories = Category.all.order("sort")
+	erb :posts_new
+end
+
+
+post '/posts/add' do
+	cate = Category.find_by(id: params["category_id"])
+
+	if cate == nil
+		"category not exists"
+	else
+		post = Post.new(params)
+		if post.save
+			redirect '/'
+		else
+			
+		end
+		#post = Post.create
+		#post.title = params["title"]
+		#ap post
+		#params.to_s
+	end
+end
+
+get '/posts/open/id' do
+	
+end
+
+get '/category/posts/:id' do
+	@category = Category.find_by(id: params[:id])
+	ap @category.posts
+	erb :category
+end
+
+
+
+get '/build/index' do
+	categories = Category.all.order("sort");
+	file = "../index.md"
+	
+	File.open(file, 'w') do |f|
+		categories.each do |cat|
+			f.puts "### #{cat.title}"
+			cat.posts.each do |c|
+				f.puts "* #{c.title}"
+			end
+			f.puts "\n\n\n\n"
+		end
+	end
+	system("open /Users/yonh/git/yonh.github.io/index2.md")
+	"done..."
+end
+
+
