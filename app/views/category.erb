@@ -7,7 +7,11 @@
  	<td> <%= post.title %></td>
  	<td> <%= post.created_at %></td>
  	<td> <%= post.updated_at %></td>
-	<td><a href="/posts/open/<%=post.id%>">编辑</a></td> 
+	<td>
+	<a href="/posts/release/<%=post.id%>">发布</a>
+	</td>
+	<td><a href="/posts/open?file=<%=post.file%>">edit</a></td> 
+	<td><a href="/posts/del/<%=post.id%>">del</a></td> 
  </tr>
  <%end%>
  </table>

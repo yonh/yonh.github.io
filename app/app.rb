@@ -62,6 +62,22 @@ get '/posts/new' do
 	erb :posts_new
 end
 
+get '/posts/del/:id' do
+	id = params[:id]
+	post = Post.find_by(id: id)
+	if post
+		# 删除markdown
+		system("rm ../md/" + post.file)
+		# 删除history
+		# 删除记录
+		post.destroy
+		redirect '/'
+	else
+		'post is not exist'
+	end
+end
+
+
 
 post '/posts/add' do
 	cate = Category.find_by(id: params["category_id"])
@@ -70,7 +86,12 @@ post '/posts/add' do
 		"category not exists"
 	else
 		post = Post.new(params)
+		# markdown文件
+		file = Time.new.strftime("%Y%m%d%H%M%S") + ".md"
+		post.file = file
+		
 		if post.save
+			system("touch ../md/#{file}")
 			redirect '/'
 		else
 			
@@ -82,8 +103,13 @@ post '/posts/add' do
 	end
 end
 
-get '/posts/open/id' do
-	
+get '/posts/open' do
+	file = "../md/" + params[:file]
+	if File.exist?(file)
+		system("open #{file}")
+	else
+		"file is not exists"
+	end
 end
 
 get '/category/posts/:id' do
@@ -102,12 +128,15 @@ get '/build/index' do
 		categories.each do |cat|
 			f.puts "### #{cat.title}"
 			cat.posts.each do |c|
-				f.puts "* #{c.title}"
+				#if c.md5!=nil and c.md5!= ''
+				if c.md5
+					f.puts "* #{c.title}"
+				end
 			end
 			f.puts "\n\n\n\n"
 		end
 	end
-	system("open /Users/yonh/git/yonh.github.io/index2.md")
+	system("open ../index.md")
 	"done..."
 end
 
