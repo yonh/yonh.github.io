@@ -3,7 +3,7 @@
 require 'sinatra'
 require 'active_record'
 require 'awesome_print'
-
+require 'digest/md5'
 
 require File.expand_path("models.rb")
 
@@ -67,7 +67,7 @@ get '/posts/del/:id' do
 	post = Post.find_by(id: id)
 	if post
 		# 删除markdown
-		system("rm ../md/" + post.file)
+		system("rm ../md/" + post.file) if post.file!=nil
 		# 删除history
 		# 删除记录
 		post.destroy
@@ -112,6 +112,47 @@ get '/posts/open' do
 	end
 end
 
+
+post '/posts/release' do
+    ap params
+    id = params[:id]
+    post = Post.find_by(id: id)
+    if post
+        tempfile = params[:file][:tempfile]
+        #filename = params[:file][:filename]
+        md5="#{Digest::MD5.hexdigest(File.read(tempfile))}"
+        file = "#{post.id.to_s}-#{md5}.html"
+        post.md5 = md5
+        if post.save
+            FileUtils.cp(tempfile.path, "../posts/#{file}")
+            'done...'
+        else
+        	'save fail...'
+        end
+    else
+        'post is not exist'
+    end
+end
+
+post '/posts/release' do
+	id = params[:id]
+	if id
+		ap params
+		tempfile = params[:file][:tempfile] 
+		filename = params[:file][:filename] 
+		md5="#{Digest::MD5.hexdigest(File.read(tempfile))}"
+	else
+		'post is not exist'
+	end
+	filename = params[:file][:filename] 
+	md5="#{Digest::MD5.hexdigest(File.read(tempfile))}"
+	puts md5
+	#
+	''
+end
+
+
+
 get '/category/posts/:id' do
 	@category = Category.find_by(id: params[:id])
 	ap @category.posts
@@ -127,10 +168,10 @@ get '/build/index' do
 	File.open(file, 'w') do |f|
 		categories.each do |cat|
 			f.puts "### #{cat.title}"
-			cat.posts.each do |c|
+			cat.posts.each do |post|
 				#if c.md5!=nil and c.md5!= ''
-				if c.md5
-					f.puts "* #{c.title}"
+				if post.md5
+					f.puts "* [#{post.title}](posts/#{post.id}-#{post.md5}.html)"
 				end
 			end
 			f.puts "\n\n\n\n"
