@@ -3,3 +3,10 @@
 
 
 
+
+### 编辑器
+* [vim的简单配置](posts/6-104c0bba1f9b2d01eec8c26a7e094e75.html)
+
+
+
+
