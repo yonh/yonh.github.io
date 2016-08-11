@@ -22,6 +22,11 @@ input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px;
 #write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
 #write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
 h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
 p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
 .mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
 .hidden { display: none; }
@@ -40,11 +45,11 @@ table.md-table td { min-width: 80px; }
 div.hr:focus { cursor: none; }
 pre { white-space: pre-wrap; }
 .CodeMirror-gutters { margin-right: 4px; }
-.md-fences, pre.md-fences { font-size: 0.9rem; display: block; page-break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+.md-fences { font-size: 0.9rem; display: block; page-break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
 .md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
 .md-fences.mock-cm { white-space: pre-wrap; }
-.show-fences-line-number pre.md-fences { padding-left: 0px; }
-.show-fences-line-number pre.md-fences.mock-cm { padding-left: 40px; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
 .footnotes { color: rgb(136, 136, 136); font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
 .footnotes + .footnotes { margin-top: -1em; }
 .md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background-color: transparent; text-decoration: none; color: rgb(51, 51, 51); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1rem; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; background-position: initial initial; background-repeat: initial initial; }
@@ -67,7 +72,7 @@ blockquote > :first-child { margin-top: 0px; }
 }
 .footnote-line { margin-top: 0.714em; font-size: 0.7em; }
 a img, img a { cursor: pointer; }
-#write pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; background-position: initial initial; background-repeat: initial initial; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; background-position: initial initial; background-repeat: initial initial; }
 p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
 #write .MathJax_Display { margin: 0.8em 0px 0px; }
 .mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
@@ -161,16 +166,12 @@ body {
 }
 
 #write{
-    max-width: 800px;
+    max-width: 860px;
   	margin: 0 auto;
   	padding: 20px 30px 40px 30px;
 	padding-top: 20px;
+    padding-bottom: 100px;
 }
-
-#write:after{
-	height:80px;
-}
-
 #write > ul:first-child,
 #write > ol:first-child{
     margin-top: 30px;
@@ -377,7 +378,6 @@ table tr td:last-child {
     border-right: 1px solid #ddd;
 }
 
-pre.md-fences,
 .md-fences,
 code,
 tt {
@@ -389,7 +389,7 @@ tt {
     padding: 2px 4px 0px 4px;
     font-size: 0.9em;
 }
-pre.md-fences,
+
 .md-fences {
     margin-bottom: 15px;
     margin-top: 15px;
@@ -498,9 +498,11 @@ pre.md-fences,
 .on-focus-mode blockquote {
     border-left-color: rgba(85, 85, 85, 0.12);
 }
+
+
 </style>
 </head>
 <body class='typora-export ' >
-<div  id='write'  class = 'is-mac'><h3><a name='header-c1' class='md-header-anchor '></a>汇编</h3><ul><li><a href='posts/5-24669485182bcae94d7c9fddf0ede7db.html'>王爽-汇编语言学习后的思考</a></li></ul><p></p><h3><a name='header-c12' class='md-header-anchor '></a>编辑器</h3><ul><li><a href='posts/6-104c0bba1f9b2d01eec8c26a7e094e75.html'>vim的简单配置</a></li></ul><p></p><h3><a name='header-c19' class='md-header-anchor '></a>计算机基础知识</h3><ul><li><a href='posts/9-ed72dc84bd6c9712032ddd9495ca2be7.html'>整数的表示，关于原码，反码和补码的思考</a></li><li><a href='posts/10-ead78a9dabc58f0c64bab938e9e6f895.html'>关于浮点数的二进制表示的思考</a></li></ul><p></p><h3><a name='header-c29' class='md-header-anchor '></a>Lisp</h3><ul><li><a href='posts/11-dc633e5e71c3c938bc43cec4cc36748c.html'>Lisp解释器的代码分析过程记录</a></li></ul><p></p><h3><a name='header-c36' class='md-header-anchor '></a>读书记录</h3><p></p><p></p></div>
+<div  id='write'  class = 'is-mac'><h3><a name='header-c1' class='md-header-anchor '></a>汇编</h3><ul><li><a href='posts/5-24669485182bcae94d7c9fddf0ede7db.html'>王爽-汇编语言学习后的思考</a></li></ul><p></p><h3><a name='header-c12' class='md-header-anchor '></a>编辑器</h3><ul><li><a href='posts/6-104c0bba1f9b2d01eec8c26a7e094e75.html'>vim的简单配置</a></li></ul><p></p><h3><a name='header-c19' class='md-header-anchor '></a>计算机基础知识</h3><ul><li><a href='posts/9-0fd98ef924aa11264056b378eff602d7.html'>整数的表示，关于原码，反码和补码的思考</a></li><li><a href='posts/10-ead78a9dabc58f0c64bab938e9e6f895.html'>关于浮点数的二进制表示的思考</a></li></ul><p></p><h3><a name='header-c29' class='md-header-anchor '></a>Lisp</h3><ul><li><a href='posts/11-dc633e5e71c3c938bc43cec4cc36748c.html'>Lisp解释器的代码分析过程记录</a></li></ul><p></p><p></p><p></p></div>
 </body>
 </html>
