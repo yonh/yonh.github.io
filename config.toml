@@ -1,4 +1,4 @@
-#baseURL = "https://yonh.github.io/"
+baseURL = "https://yonh.github.io/docs/"
 languageCode = "en-us"
 title = "Yonh's Blog"
 theme = "minimal"

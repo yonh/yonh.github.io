@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Yonh&#39;s Blog</title>
-    <link>/post/</link>
+    <link>https://yonh.github.io/docs/post/</link>
     <description>Recent content in Posts on Yonh&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 10 Jul 2018 06:36:56 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yonh.github.io/docs/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>关于浮点数的二进制表示的思考</title>
-      <link>/post/about-binary/</link>
+      <link>https://yonh.github.io/docs/post/about-binary/</link>
       <pubDate>Tue, 10 Jul 2018 06:36:56 +0000</pubDate>
       
-      <guid>/post/about-binary/</guid>
+      <guid>https://yonh.github.io/docs/post/about-binary/</guid>
       <description>科学计数法 在谈论浮点数表示形式之前，我们先看看，如何用科学计数法表示一个实数, 如
 $123 = 1.23 * 10^2$
 $45.6=4.56 * 10^1$
@@ -29,21 +29,38 @@ $-0.789 = -7.89 * 10^{-1}$
     </item>
     
     <item>
-      <title>vim的简单配置</title>
-      <link>/post/vim-config/</link>
+      <title>Lisp解释器的代码分析过程记录</title>
+      <link>https://yonh.github.io/docs/post/lisp-interpreter/</link>
       <pubDate>Sun, 29 May 2016 23:08:52 +0000</pubDate>
       
-      <guid>/post/vim-config/</guid>
+      <guid>https://yonh.github.io/docs/post/lisp-interpreter/</guid>
+      <description>说明 由于文章不是同一时间写的，而是不断的往上加内容，而且我觉得这样完整的记录我的整个分析记录是非常不错的方式，对于我的混乱写作感到抱歉请见谅，我只是遵循着心中的言语而作的记录
+五一期间，打算给自己整天的时间好好看看《实用Common Lisp编程》，却是意外的发现了篇非常棒的lisp入门文章-过河卒的（记得以前我是看过了，但是当时不知道是觉得难还是其他什么原因，没继续看），里面从基础直到讲解编写一个lisp解释器的实现（文章是这么说的），已经忘了怎么能找到的了，回想起来，将其称之为缘分吧，我无法解释这些我喜欢的东西能这么有幸与我相遇(不仅仅是编程)，也是我为什么需要写文的原因，因为我会忘了一切，几乎就没记住过很多东西，我讨厌让我的脑子很累(我非常刻意的逃避一些东西,请原谅我的记性，因为我不会记得我不感兴趣的东西，因为那太累了[借口？我想是的])
+回到这篇文章，看它来入门真的非常不错，我看到讲到Lisp世界七个公理的部分，我搜索了下&amp;rdquo;Lisp七个公理&amp;rdquo;, 有幸找到了维基教科书里面的Lisp入门，这网站非常好，能够生成电子书以下载，
+网站地址在此: Lisp 入門 将其10章看完，感觉我之前看到《实用Common Lisp编程》实在不该（这个入门比较简单，能比较好的理解lisp一些基本知识），对比这3篇我看过的入门文章，我不想去说哪个好，我本身没什么本事，没那个资格评判它们(当然，我是认为该尊重自己内心的想法就好[它既不正确也不错误]，它是怎么就怎么),它们给了我不同的视角去了解lisp,让我发现，哦，原来入门文章可以这么写(今天刚看了个视频，讲的是有名的IT词汇的解释，里面讲课的方式就非常棒，事先弄出一个画面，然后拿着各种接下来的操作的纸条，场景来继续下面的讲课，非常生动) 下面是过河卒的lisp入门文章链接 http://www.cnblogs.com/suiqirui19872005/archive/2007/12/05/984517.html 当然这个解释器可能是出自这里的 http://daiyuwen.freeshell.org/gb/rol/roots_of_lisp.html
+文章基本看完了，剩下下面的lisp解释器实现实在是看不懂，于是将我的下班空闲时间都用来研究它了，以下是笔记
+2014-05-06 00:52:12
+需要注意的是，文章后面2章顺序颠倒了，而且函数pair实现最后一行(pair (cdr) (cdr y))))))应改为(pair (cdr x) (cdr y)))))),具体的eval，assoc函数应该改个名字，我不知道common lisp标准里面有没有它们(应该是有吧,没去研究),反正我是提示了已存在函数声明，所以我改成了加个2的名字
+-————完整程序 迷糊的摘录了(拷贝的)，学习中修正错误&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;
+(defun assoc2 (x y) (cond ((eq (caar y) x) (cadar y)) (t (assoc x (cdr y))))) &amp;gt; (assoc2 &#39;a &#39;((a 1) (b 2))) 1 (defun pair (x y) (cond ((and (null x) (null y)) &#39;()) ((and (not (atom x)) (not (atom y))) (cons (list (car x) (car y)) (pair (cdr x) (cdr y)))))) &amp;gt; (pair &#39;(1 2) &#39;(A B)) ((1 A) (2 B)) (defun eval2 (e a) (cond ((atom e) (assoc2 e a)) ;第一段 ((atom (car e)) ;第二段 (cond ((eq (car e) &#39;quote) (cadr e)) ((eq (car e) &#39;atom) (atom (eval2 (cadr e) a))) ((eq (car e) &#39;eq) (eq (eval2 (cadr e) a) (eval2 (caddr e) a))) ((eq (car e) &#39;car) (car (eval2 (cadr e) a))) ((eq (car e) &#39;cdr) (cdr (eval2 (cadr e) a))) ((eq (car e) &#39;cons) (cons (eval2 (cadr e) a) (eval2 (caddr e) a))) ((eq (car e) &#39;cond) (evcon (cdr e) a)) (&#39;t (eval (cons (assoc2 (car e) a) (cdr e)) a)))) ;第二段结束 ((eq (caar e) &#39;label) (eval (cons (caddar e) (cdr e)) (cons (list (cadar e) (car e)) a))) ((eq (caar e) &#39;lambda) (eval (caddar e) (append (pair (cadar e) (evlis (cdr e) a)) a))))) (defun evcon (c a) (cond ((eval2 (caar c) a) (eval2 (cadar c) a)) (&#39;t (evcon (cdr c) a)))) (defun evlis (m a) (cond ((null m) &#39;()) (&#39;t (cons (eval2 (car m) a) (evlis (cdr m) a)))))  ; 基本知识 ; 1，lisp七个基本操作符，caar，cadr等函数的理解， -------------------我写的程序---------------- ; 依赖函数 (defun assoc2 (x y) (cond ((eq (caar y) x) (cadar y)) (t (assoc2 x (cdr y))))) &amp;gt;(assoc2 &#39;a &#39;((a x) (b y))) x  第一段</description>
+    </item>
+    
+    <item>
+      <title>vim的简单配置</title>
+      <link>https://yonh.github.io/docs/post/vim-config/</link>
+      <pubDate>Sun, 29 May 2016 23:08:52 +0000</pubDate>
+      
+      <guid>https://yonh.github.io/docs/post/vim-config/</guid>
       <description>说明 我对vi的使用上没什么挑剔的,毕竟多数是在写小程序上使用的 默认的vi其实也够用了不过还是为了增加使用vi时的编码效率还是弄些插件,改改默认配置,在此做个记录
 syntax on &amp;quot; 语法高亮 set autoindent &amp;quot; 自动对齐,把当前行的对起格式应用到下一行 set smartindent &amp;quot; 智能的选择对起方式 set smartindent &amp;quot; 开启新行时使用智能自动缩进 set tabstop=4 &amp;quot; 设置tab键为4个空格, 默认8, set shiftwidth=4&amp;quot; 将换行自动缩进设置成4个空格 set cursorline &amp;quot; 横线指示当前行 set ruler &amp;quot; 打开状态栏标尺 set incsearch &amp;quot; 输入搜索内容时就显示搜索结果 set hlsearch &amp;quot; 搜索时高亮显示被找到的文本 set showmatch &amp;quot; 插入括号时，短暂地跳转到匹配的对应括号 set laststatus=2 &amp;quot;显示状态栏 (默认值为 1, 无法显示状态栏) set cmdheight=1 &amp;quot; 显示状态栏 (默认值为 1, 无法显示状态栏) &amp;quot; 设置在状态行显示的信息 set statusline=\ %&amp;lt;%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&amp;amp;fileformat}\ %{&amp;amp;encoding}\ %c:%l/%L%) &amp;quot;普通状态下输入f即可打印出function定义 nnoremap f ofunction () {&amp;lt;ENTER&amp;gt;&amp;lt;ESC&amp;gt;i}&amp;lt;ESC&amp;gt;kwi &amp;quot; 这样分号键就可以进入命令行模式 nnoremap ; : inoremap ( ()&amp;lt;ESC&amp;gt;i inoremap [ []&amp;lt;ESC&amp;gt;i inoremap &amp;quot; &amp;quot;&amp;quot;&amp;lt;ESC&amp;gt;i inoremap { {}&amp;lt;ESC&amp;gt;i &amp;quot;输入(&amp;quot;时补全&amp;quot;); inoremap (&amp;quot; (&amp;quot;&amp;quot;);&amp;lt;ESC&amp;gt;hhi inoremap then thenend&amp;lt;ESC&amp;gt;hhi&amp;lt;ENTER&amp;gt;&amp;lt;BACKSPACE&amp;gt;&amp;lt;ESC&amp;gt;ko  添加颜色主题 关于颜色主题这个不影响使用,但是在实际在linux上使用发现蓝色比较难看清,索性就找找颜色主题替换算了 vim的颜色主题很好修改,在配置文件里面添加 colorscheme 主题名称 就行了 至于主题可以到vim官网或github找 http://www.</description>
     </item>
     
     <item>
       <title>王爽-汇编语言学习感想</title>
-      <link>/post/about-asm/</link>
+      <link>https://yonh.github.io/docs/post/about-asm/</link>
       <pubDate>Sun, 29 May 2016 23:08:52 +0000</pubDate>
       
-      <guid>/post/about-asm/</guid>
+      <guid>https://yonh.github.io/docs/post/about-asm/</guid>
       <description>不知道什么时候开始,我有个习惯,就是在书上标注购买时间,这样我会知道我的每一本书的购买日期,当我再次拿起书本时,我知道,原来它已经陪伴了我这么久,但我却不懂得珍惜,以致于现在我还没看完.
 我购买的王爽的汇编语言是11年12月11日,距今差不多5年了,然而我还是没能看完这本最简单的汇编入门书,而时光一晃,几年过去了,我却什么也没学到,最大原因还是自身的浮躁.
 一开始我就有着许多不切实际的幻想,写操作系统,写游戏,写编译器等,也买上了许多书,认为我应该学习这个,应该学习那个,但最后都半途而废了,浪费了太多时间.
@@ -54,16 +71,6 @@ syntax on &amp;quot; 语法高亮 set autoindent &amp;quot; 自动对齐,把当�
  复利原理，要表达的意思是：复利周期内看似不起眼的小进步或者小退步，假以时日，则会让本体产生超乎想象的巨大进步或者退步
  不要高估你一年能做成的事, 也不要低估你五年能做成的事
   </description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/post/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
     </item>
     
   </channel>

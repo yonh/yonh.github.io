@@ -3,74 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/about-binary/</loc>
+    <loc>https://yonh.github.io/docs/post/about-binary/</loc>
     <lastmod>2018-07-10T06:36:56+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/vim-config/</loc>
+    <loc>https://yonh.github.io/docs/post/lisp-interpreter/</loc>
     <lastmod>2016-05-29T23:08:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/about-asm/</loc>
+    <loc>https://yonh.github.io/docs/post/vim-config/</loc>
     <lastmod>2016-05-29T23:08:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>https://yonh.github.io/docs/post/about-asm/</loc>
+    <lastmod>2016-05-29T23:08:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://yonh.github.io/docs/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/development/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/go/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/golang/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
+    <loc>https://yonh.github.io/docs/post/</loc>
     <lastmod>2018-07-10T06:36:56+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>https://yonh.github.io/docs/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/template/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/themes/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>https://yonh.github.io/docs/</loc>
     <lastmod>2018-07-10T06:36:56+00:00</lastmod>
     <priority>0</priority>
   </url>
