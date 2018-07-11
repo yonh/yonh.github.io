@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>vim的简单配置</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/php.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ruby.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.30.2" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">vim的简单配置</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/yonh/"><i class="fa fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/vim-config/">vim的简单配置</a></h4>
+    <h5>May 29, 2016</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="说明">说明</h3>
+
+<p>我对vi的使用上没什么挑剔的,毕竟多数是在写小程序上使用的
+默认的vi其实也够用了不过还是为了增加使用vi时的编码效率还是弄些插件,改改默认配置,在此做个记录</p>
+
+<pre><code class="language-vim">syntax on       &quot; 语法高亮
+
+set autoindent  &quot; 自动对齐,把当前行的对起格式应用到下一行
+set smartindent &quot; 智能的选择对起方式
+set smartindent &quot; 开启新行时使用智能自动缩进
+set tabstop=4   &quot; 设置tab键为4个空格, 默认8,
+set shiftwidth=4&quot; 将换行自动缩进设置成4个空格
+
+
+set cursorline  &quot; 横线指示当前行
+
+set ruler       &quot; 打开状态栏标尺
+
+set incsearch   &quot; 输入搜索内容时就显示搜索结果
+set hlsearch    &quot; 搜索时高亮显示被找到的文本
+
+set showmatch   &quot; 插入括号时，短暂地跳转到匹配的对应括号
+
+set laststatus=2 &quot;显示状态栏 (默认值为 1, 无法显示状态栏)
+set cmdheight=1 &quot; 显示状态栏 (默认值为 1, 无法显示状态栏)
+&quot; 设置在状态行显示的信息
+set statusline=\ %&lt;%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&amp;fileformat}\ %{&amp;encoding}\ %c:%l/%L%)
+
+
+&quot;普通状态下输入f即可打印出function定义
+nnoremap f ofunction () {&lt;ENTER&gt;&lt;ESC&gt;i}&lt;ESC&gt;kwi
+&quot; 这样分号键就可以进入命令行模式
+nnoremap ; :
+
+inoremap ( ()&lt;ESC&gt;i
+inoremap [ []&lt;ESC&gt;i
+inoremap &quot; &quot;&quot;&lt;ESC&gt;i
+inoremap { {}&lt;ESC&gt;i
+&quot;输入(&quot;时补全&quot;);
+inoremap (&quot; (&quot;&quot;);&lt;ESC&gt;hhi
+inoremap then thenend&lt;ESC&gt;hhi&lt;ENTER&gt;&lt;BACKSPACE&gt;&lt;ESC&gt;ko
+</code></pre>
+
+<h3 id="添加颜色主题">添加颜色主题</h3>
+
+<p>关于颜色主题这个不影响使用,但是在实际在linux上使用发现蓝色比较难看清,索性就找找颜色主题替换算了
+vim的颜色主题很好修改,在配置文件里面添加 colorscheme 主题名称 就行了
+至于主题可以到vim官网或github找
+<a href="http://www.vim.org/scripts/script.php?script_id=625">http://www.vim.org/scripts/script.php?script_id=625</a>
+下载之后将文件存放在~/.vim/colors, 配置文件上加上<code>colorscheme 主题名称</code>(其实就是主题的文件名)</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "username" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

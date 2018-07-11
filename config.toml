@@ -1,0 +1,60 @@
+#baseURL = "https://yonh.github.io/"
+languageCode = "en-us"
+title = "Yonh's Blog"
+theme = "minimal"
+disqusShortname = "username" # delete this to disable disqus comments
+googleAnalytics = ""
+canonifyurls = true
+
+
+[params]
+    author = "Yonh Lai"
+    description = "群棕是马勒戈壁上的最低级植物，常集体生长，以三聚青胺和地沟油为生，大部分在蜗牛壳中生长，是公务猿和河蟹的食物。 少数群棕带了三块表可以高级进化到公务猿，据说进化的标准是1.肚子变大, 2.心变黑。但是如何进化都需要有关部门决定，而这个有关部门在宇宙中并不存在。公务猿和河蟹经常把群棕装饰在脸上，表示他们喜欢群棕这种食物，有时候他们害怕真象把群棕带走，所以他们称这种群棕为不鸣真象的群棕。"
+    githubUsername = "yonh"
+    accent = "red"
+    showBorder = true
+    backgroundColor = "white"
+    font = "Raleway" # should match the name on Google Fonts!
+    highlight = true
+    highlightStyle = "solarized-light"
+    #highlightStyle = "solarized-dark"
+    highlightLanguages = ["go", "haskell", "kotlin", "scala", "swift", "java", "php", "ruby"]
+
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+
+[[menu.main]]
+    url = "/post/"
+    name = "Posts"
+    weight = 2
+
+# Social icons to be shown on the right-hand side of the navigation bar
+# The "name" field should match the name of the icon to be used
+# The list of available icons can be found at http://fontawesome.io/icons/
+
+#[[menu.icon]]
+#    url = "mailto:me@example.com"
+#    name = "envelope-o"
+#    weight = 1
+
+[[menu.icon]]
+    url = "https://github.com/yonh/"
+    name = "github"
+    weight = 2
+
+#[[menu.icon]]
+#    url = "https://twitter.com/username/"
+#    name = "twitter"
+#    weight = 3
+
+#[[menu.icon]]
+#    url = "https://www.linkedin.com/in/username/"
+#    name = "linkedin"
+#    weight = 4
+
+#[[menu.icon]]
+#    url = "https://www.stackoverflow.com/username/"
+#    name = "stack-overflow"
+#    weight = 5

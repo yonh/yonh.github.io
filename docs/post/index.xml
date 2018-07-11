@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Yonh&#39;s Blog</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Yonh&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Jul 2018 06:36:56 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于浮点数的二进制表示的思考</title>
+      <link>/post/about-binary/</link>
+      <pubDate>Tue, 10 Jul 2018 06:36:56 +0000</pubDate>
+      
+      <guid>/post/about-binary/</guid>
+      <description>科学计数法 在谈论浮点数表示形式之前，我们先看看，如何用科学计数法表示一个实数, 如
+$123 = 1.23 * 10^2$
+$45.6=4.56 * 10^1$
+$-0.789 = -7.89 * 10^{-1}$
+这里我们可以找出下列数据
+   数字 尾数 指数 符号     123 23 2 正   45.6 56 1 正   -78.9 789 -1 负    浮点数各位的大小 相比整数，浮点数的二进制表示稍显复杂,根据IEEE-754标准规定，浮点数表示分3部分
+符号，指数和尾数，之所以开始提到科学计数法，原因就在此，浮点数的表示就是基于科学计数法的形式存储
+其占位数(2进制位)分别如下
+   类型 符号(S) 指数(E) 尾数(M)     单精度 (float) 1 8 23   双精度 (double) 1 11 52    那么我们可以看到，单精度和双精度的数字在内存中的表示如下 (S符号位 E指数 M尾数)</description>
+    </item>
+    
+    <item>
+      <title>vim的简单配置</title>
+      <link>/post/vim-config/</link>
+      <pubDate>Sun, 29 May 2016 23:08:52 +0000</pubDate>
+      
+      <guid>/post/vim-config/</guid>
+      <description>说明 我对vi的使用上没什么挑剔的,毕竟多数是在写小程序上使用的 默认的vi其实也够用了不过还是为了增加使用vi时的编码效率还是弄些插件,改改默认配置,在此做个记录
+syntax on &amp;quot; 语法高亮 set autoindent &amp;quot; 自动对齐,把当前行的对起格式应用到下一行 set smartindent &amp;quot; 智能的选择对起方式 set smartindent &amp;quot; 开启新行时使用智能自动缩进 set tabstop=4 &amp;quot; 设置tab键为4个空格, 默认8, set shiftwidth=4&amp;quot; 将换行自动缩进设置成4个空格 set cursorline &amp;quot; 横线指示当前行 set ruler &amp;quot; 打开状态栏标尺 set incsearch &amp;quot; 输入搜索内容时就显示搜索结果 set hlsearch &amp;quot; 搜索时高亮显示被找到的文本 set showmatch &amp;quot; 插入括号时，短暂地跳转到匹配的对应括号 set laststatus=2 &amp;quot;显示状态栏 (默认值为 1, 无法显示状态栏) set cmdheight=1 &amp;quot; 显示状态栏 (默认值为 1, 无法显示状态栏) &amp;quot; 设置在状态行显示的信息 set statusline=\ %&amp;lt;%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&amp;amp;fileformat}\ %{&amp;amp;encoding}\ %c:%l/%L%) &amp;quot;普通状态下输入f即可打印出function定义 nnoremap f ofunction () {&amp;lt;ENTER&amp;gt;&amp;lt;ESC&amp;gt;i}&amp;lt;ESC&amp;gt;kwi &amp;quot; 这样分号键就可以进入命令行模式 nnoremap ; : inoremap ( ()&amp;lt;ESC&amp;gt;i inoremap [ []&amp;lt;ESC&amp;gt;i inoremap &amp;quot; &amp;quot;&amp;quot;&amp;lt;ESC&amp;gt;i inoremap { {}&amp;lt;ESC&amp;gt;i &amp;quot;输入(&amp;quot;时补全&amp;quot;); inoremap (&amp;quot; (&amp;quot;&amp;quot;);&amp;lt;ESC&amp;gt;hhi inoremap then thenend&amp;lt;ESC&amp;gt;hhi&amp;lt;ENTER&amp;gt;&amp;lt;BACKSPACE&amp;gt;&amp;lt;ESC&amp;gt;ko  添加颜色主题 关于颜色主题这个不影响使用,但是在实际在linux上使用发现蓝色比较难看清,索性就找找颜色主题替换算了 vim的颜色主题很好修改,在配置文件里面添加 colorscheme 主题名称 就行了 至于主题可以到vim官网或github找 http://www.</description>
+    </item>
+    
+    <item>
+      <title>王爽-汇编语言学习感想</title>
+      <link>/post/about-asm/</link>
+      <pubDate>Sun, 29 May 2016 23:08:52 +0000</pubDate>
+      
+      <guid>/post/about-asm/</guid>
+      <description>不知道什么时候开始,我有个习惯,就是在书上标注购买时间,这样我会知道我的每一本书的购买日期,当我再次拿起书本时,我知道,原来它已经陪伴了我这么久,但我却不懂得珍惜,以致于现在我还没看完.
+我购买的王爽的汇编语言是11年12月11日,距今差不多5年了,然而我还是没能看完这本最简单的汇编入门书,而时光一晃,几年过去了,我却什么也没学到,最大原因还是自身的浮躁.
+一开始我就有着许多不切实际的幻想,写操作系统,写游戏,写编译器等,也买上了许多书,认为我应该学习这个,应该学习那个,但最后都半途而废了,浪费了太多时间.
+从3月份开始,我开始重新对本书的学习,花了2个月的时间,我把书中几乎所有的程序都实现了一遍,当然也有疑惑,只是我不大想深究,我最终的目的是想对C,汇编,操作系统有个全局的了解,然后写一个极小的操作系统,之后再干嘛我已经不想计划了,单单这个过程我想至少会消耗我1年甚至更长的时间,我能不能坚持下来已经是个问题,我不能再给自己太多的选择了,因为我看到了我4年多的时间是如何浪费的.
+最后,摘录一些其他领域我摘录下来的语句送给自己以及正在阅读这篇文章的朋友,我相信,知识在一定程度内是相通的
+ 复利原理就是普世大道
+ 不要执迷于某个数字的多少次方后边的结果，那只是点燃内心欲望，让人自迷的表象
+ 复利原理，要表达的意思是：复利周期内看似不起眼的小进步或者小退步，假以时日，则会让本体产生超乎想象的巨大进步或者退步
+ 不要高估你一年能做成的事, 也不要低估你五年能做成的事
+  </description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>/post/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
+    </item>
+    
+  </channel>
+</rss>
