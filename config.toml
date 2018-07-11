@@ -5,6 +5,7 @@ theme = "minimal"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 canonifyurls = true
+paginate = 10
 
 
 [params]
@@ -18,7 +19,7 @@ canonifyurls = true
     highlight = true
     highlightStyle = "solarized-light"
     #highlightStyle = "solarized-dark"
-    highlightLanguages = ["go", "haskell", "kotlin", "scala", "swift", "java", "php", "ruby"]
+    highlightLanguages = ["go", "haskell", "kotlin", "scala", "swift", "java", "php", "ruby", "lisp"]
 
 [[menu.main]]
     url = "/"
