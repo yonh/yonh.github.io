@@ -3,7 +3,10 @@
 # run with docker
 docker-compose up -d
 
-# build html
+# build html in container
 hugo -d docs/
+
+# build html in host
+./build.sh
 ```
 
