@@ -8,5 +8,9 @@ hugo -d docs/
 
 # build html in host
 ./build.sh
+
+# create new post
+hugo new posts/post_name.md
+
 ```
 
