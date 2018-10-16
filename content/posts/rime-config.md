@@ -7,6 +7,9 @@ draft: false
 ### 环境
 Ubuntu 18.04
 
+### 目标
+* 配置rime输入法，添加双拼方案
+
 ```shell
 # 安装rime和双拼方案
 sudo apt install -y fcitx-rime librime-data-double-pinyin
