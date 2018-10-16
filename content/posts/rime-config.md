@@ -22,9 +22,10 @@ sudo apt install -y fcitx-rime librime-data-double-pinyin
 echo "\
 # default.custom.yaml
 # save it to:
-#   ~/.config/ibus/rime  (linux)
-#   ~/Library/Rime       (macos)
-#   %APPDATA%\Rime       (windows)
+#   ~/.config/ibus/rime   (linux ibus)
+#   ~/.config/fcitx/rime  (linux fcitx)
+#   ~/Library/Rime        (macos)
+#   %APPDATA%\Rime        (windows)
 
 patch:
   schema_list:
