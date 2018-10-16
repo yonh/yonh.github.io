@@ -10,14 +10,15 @@ Ubuntu 18.04
 ### 目标
 * 配置rime输入法，添加双拼方案
 
+
+
+### 配置
+
 ```shell
 # 安装rime和双拼方案
 sudo apt install -y fcitx-rime librime-data-double-pinyin
-```
 
-### 配置
-创建配置文件 `~/.config/fcitx/rime/default.custom.yaml`并配置。
-```shell
+# 创建配置文件 `~/.config/fcitx/rime/default.custom.yaml`并配置。
 echo "\
 # default.custom.yaml
 # save it to:
