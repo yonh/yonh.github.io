@@ -1,7 +1,7 @@
 baseURL = "https://yonh.github.io/docs/"
 languageCode = "en-us"
 title = "Yonh's Blog"
-theme = "minimal"
+theme = "minimal-yonh"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 canonifyurls = true
