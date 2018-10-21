@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>使用Karabiner将其他键盘配置为类似HHKB的布局</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/main.css' />
+
+
+
+
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/font.css' />
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"> 
+
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/bootstrap.min.css' integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/font-awesome.min.css' integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/php.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ruby.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src='https://yonh.github.io/docs/js/jquery-3.2.1.min.js'></script>
+
+
+
+<script src='https://yonh.github.io/docs/js/bootstrap.min.js' integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.30.2" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">使用Karabiner将其他键盘配置为类似HHKB的布局</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://yonh.github.io/docs/">Home</a></li>
+                            
+                                <li><a href="https://yonh.github.io/docs/posts/">Posts</a></li>
+                            
+                                <li><a href="https://yonh.github.io/docs/chords/">Chords</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/yonh/"><i class="fa fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://yonh.github.io/docs/posts/set-keyboard-to-hhkb-style/">使用Karabiner将其他键盘配置为类似HHKB的布局</a></h4>
+    <h5>October 21, 2018</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="使用karabiner将其他键盘配置为类似hhkb的布局">使用Karabiner将其他键盘配置为类似HHKB的布局</h1>
+
+<h4 id="背景说明">背景说明</h4>
+
+<p>配置键盘： <code>Niz 84键无线蓝牙静电容键盘</code></p>
+
+<p>事实上的配置应该是<code>HHKB lite</code>的布局，因为非lite版的HHKB键盘左下角都没有<code>fn</code>键</p>
+
+<p>但是我用惯了<code>fn</code>在左下角的方式，因此我会把HHKB的<code>left_opt</code>替换为<code>fn</code>,其他键盘类似。</p>
+
+<p><a href="https://pqrs.org/osx/karabiner">下载Karabiner-Elements</a>, <a href="https://pqrs.org/osx/karabiner/json.html#typical-complex_modifications-examples-change-right-shift-x2-to-mission-control">官方文档</a></p>
+
+<ul>
+<li><p>任务</p>
+
+<ul>
+<li><code>caps_lock</code> to <code>fn</code></li>
+<li><code>~</code> to <code>Esc</code> , <code>Home</code> to <code>~</code></li>
+<li>HHKB Arrow Mode (fn + semicolon/slash/open_bracket/quote to arrow keys, etc)</li>
+</ul></li>
+
+<li><p>问题</p>
+
+<ul>
+<li>fn + control + 上下左右不能切换屏幕</li>
+</ul></li>
+
+<li><p>学习到的知识</p>
+
+<ul>
+<li>在哪里保存<code>karabiner</code>映射规则脚本</li>
+<li>映射规则基本语法</li>
+</ul></li>
+
+<li><p>解决方案</p>
+
+<ul>
+<li><code>optional</code>添加<code>control</code></li>
+</ul></li>
+</ul>
+
+<h4 id="视频">视频</h4>
+
+<p><object width="425" height="344"><param name="movie" value="https://www.youtube.com/v/R0OHiyxM2A4&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="https://www.youtube.com/v/R0OHiyxM2A4&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object></p>
+
+<p>规则脚本放在<code>~/.config/karabiner/assets/complex_modifications</code></p>
+
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Happy Hacking Keyboard Compatible Mode (rev 2)&quot;,
+  &quot;rules&quot;: [
+    {
+      &quot;description&quot;: &quot;HHKB Arrow Mode (fn + semicolon/slash/open_bracket/quote to arrow keys, etc)&quot;,
+      &quot;manipulators&quot;: [
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;semicolon&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;option&quot;,
+                &quot;command&quot;,
+                &quot;control&quot;,
+                &quot;shift&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;left_arrow&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;slash&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;option&quot;,
+                &quot;command&quot;,
+                &quot;control&quot;,
+                &quot;shift&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;down_arrow&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;open_bracket&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;option&quot;,
+                &quot;command&quot;,
+                &quot;control&quot;,
+                &quot;shift&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;up_arrow&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;quote&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;option&quot;,
+                &quot;command&quot;,
+                &quot;control&quot;,
+                &quot;shift&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;right_arrow&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;l&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;control&quot;,
+                &quot;option&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;page_up&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;period&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;,
+                &quot;control&quot;,
+                &quot;option&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;page_down&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;k&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;home&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;comma&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;caps_lock&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;end&quot;
+            }
+          ]
+        }
+      ]
+    },
+    {
+      &quot;description&quot;: &quot;HHKB Media Key Mode (fn + asdf to Volume down/up/mute, eject) (rev 2)&quot;,
+      &quot;manipulators&quot;: [
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;a&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;any&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;consumer_key_code&quot;: &quot;volume_decrement&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;s&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;any&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;consumer_key_code&quot;: &quot;volume_increment&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;d&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;any&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;consumer_key_code&quot;: &quot;mute&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;f&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ],
+              &quot;optional&quot;: [
+                &quot;any&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;consumer_key_code&quot;: &quot;eject&quot;
+            }
+          ]
+        }
+      ]
+    },
+    {
+      &quot;description&quot;: &quot;Map fn + i, o, p  to F13, F14, F15.&quot;,
+      &quot;manipulators&quot;: [
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;i&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;f13&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;o&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;f14&quot;
+            }
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;basic&quot;,
+          &quot;from&quot;: {
+            &quot;key_code&quot;: &quot;p&quot;,
+            &quot;modifiers&quot;: {
+              &quot;mandatory&quot;: [
+                &quot;fn&quot;
+              ]
+            }
+          },
+          &quot;to&quot;: [
+            {
+              &quot;key_code&quot;: &quot;f15&quot;
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "username" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

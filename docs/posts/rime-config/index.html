@@ -153,20 +153,19 @@
 <li>配置rime输入法，添加双拼方案</li>
 </ul>
 
-<pre><code class="language-shell"># 安装rime和双拼方案
-sudo apt install -y fcitx-rime librime-data-double-pinyin
-</code></pre>
-
 <h3 id="配置">配置</h3>
 
-<p>创建配置文件 <code>~/.config/fcitx/rime/default.custom.yaml</code>并配置。</p>
+<pre><code class="language-shell"># 安装rime和双拼方案
+sudo apt install -y fcitx-rime librime-data-double-pinyin
 
-<pre><code class="language-shell">echo &quot;\
+# 创建配置文件 `~/.config/fcitx/rime/default.custom.yaml`并配置。
+echo &quot;\
 # default.custom.yaml
 # save it to:
-#   ~/.config/ibus/rime  (linux)
-#   ~/Library/Rime       (macos)
-#   %APPDATA%\Rime       (windows)
+#   ~/.config/ibus/rime   (linux ibus)
+#   ~/.config/fcitx/rime  (linux fcitx)
+#   ~/Library/Rime        (macos)
+#   %APPDATA%\Rime        (windows)
 
 patch:
   schema_list:
