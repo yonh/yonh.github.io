@@ -101,3 +101,21 @@ footer {
 img {
     max-width: 100%;
 }
+
+table {
+    margin-bottom: 5px;
+}
+
+table thead{
+    /*background:#FAFAFA;*/
+    background:#F0F0F0;
+}
+table td, table th{
+    border: 1px solid #CCC;
+    padding: 5px 10px;
+}
+table tr:nth-child(even) {
+    background: #FFFFF9;
+    /*background: #f6ffff;*/
+    /*background: #f3feee;*/
+}
