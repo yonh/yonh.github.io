@@ -21,3 +21,15 @@
 
 <!-- dismiss expanded navigation bar with click -->
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+<script src='{{ "js/MathJax-2.7.5.js?config=TeX-MML-AM_CHTML" | absURL }}' async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(', '\\)']],
+    processEscapes: true
+  }
+});
+</script>
+
