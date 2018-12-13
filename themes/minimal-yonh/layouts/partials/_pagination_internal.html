@@ -1,0 +1,9 @@
+<style>
+    #pagination {text-align: center;}
+    .pagination > li > a,.pagination > li > a:hover,.pagination > li > span{color: red;}
+    .pagination > .active > a,.pagination > .active > a:hover {color: orangered; background-color: #eee;border-color: #ddd;}
+</style>
+<div id="pagination">
+    <!-- Hugo's default pagination template. -->
+    {{ template "_internal/pagination.html" . }}
+</div>

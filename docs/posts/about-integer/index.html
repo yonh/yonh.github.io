@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>整数的表示，关于原码，反码和补码的思考</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/main.css' />
+
+
+
+
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/font.css' />
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"> 
+
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/bootstrap.min.css' integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href='https://yonh.github.io/docs/css/font-awesome.min.css' integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/php.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ruby.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src='https://yonh.github.io/docs/js/jquery-3.2.1.min.js'></script>
+
+
+
+<script src='https://yonh.github.io/docs/js/bootstrap.min.js' integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+<script src='https://yonh.github.io/docs/js/MathJax-2.7.5.js' async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(', '\\)']],
+    processEscapes: true
+  }
+});
+</script>
+
+ <meta name="generator" content="Hugo 0.30.2" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">整数的表示，关于原码，反码和补码的思考</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://yonh.github.io/docs/">Home</a></li>
+                            
+                                <li><a href="https://yonh.github.io/docs/posts/">Posts</a></li>
+                            
+                                <li><a href="https://yonh.github.io/docs/chords/">Chords</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/yonh/"><i class="fa fa-github"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://yonh.github.io/docs/posts/about-integer/">整数的表示，关于原码，反码和补码的思考</a></h4>
+    <h5>June 21, 2016</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>整数分为<code>有符号整数</code>和<code>无符号整数</code>,其实就是通常意义下的<code>正整数</code>和<code>负整数</code>。</p>
+
+<p>为了简单起见，这里的数字使用4位二进制表示，这样数的范围不会太大(这样我就不用列大大的表格啦)。</p>
+
+<h2 id="无符号整数">无符号整数</h2>
+
+<p>无符号整数的表示比较简单，直接将其转换为二进制即可，如</p>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>二进制</td>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>二进制</td>
+<td>1000</td>
+<td>1001</td>
+<td>1010</td>
+<td>1011</td>
+<td>1100</td>
+<td>1101</td>
+<td>1110</td>
+<td>1111</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="有符号整数">有符号整数</h2>
+
+<h4 id="原码表示">原码表示</h4>
+
+<p>原码通过分配一个最高位用于表示数字的正负，其余位数表示数值，相应值如下</p>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>原码</td>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>-0</th>
+<th>-1</th>
+<th>-2</th>
+<th>-3</th>
+<th>-4</th>
+<th>-5</th>
+<th>-6</th>
+<th>-7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>原码</td>
+<td>1000</td>
+<td>1001</td>
+<td>1010</td>
+<td>1011</td>
+<td>1100</td>
+<td>1101</td>
+<td>1110</td>
+<td>1111</td>
+</tr>
+</tbody>
+</table>
+
+<p>虽然原码看起来比较简单，但是其存在2个0，更重要的是使用原码进行加法运算也不会得到正确的结果，不信你看</p>
+
+<pre><code># 1 + (-1)
+0001 + 1001 =&gt; 1010 =&gt; -2
+# 1 + (-3)
+0001 + 1011 =&gt; 1100 =&gt; -4
+</code></pre>
+
+<h4 id="反码表示">反码表示</h4>
+
+<p>反码就是在原码的基础上，将正数各位取反获得负数反码，正数的反码就是它二进制值本身,如下表</p>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>反码</td>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>-0</th>
+<th>-1</th>
+<th>-2</th>
+<th>-3</th>
+<th>-4</th>
+<th>-5</th>
+<th>-6</th>
+<th>-7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>反码</td>
+<td>1111</td>
+<td>1110</td>
+<td>1101</td>
+<td>1100</td>
+<td>1011</td>
+<td>1010</td>
+<td>1001</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+
+<p>反码解决原码中计算加法的时候数值不正确的问题,但是它还存在有2个0的问题</p>
+
+<pre><code># 1 + (-1)
+0001 + 1110 =&gt; 1111 =&gt; 0
+# 1+ (-7)
+0001 + 1000 =&gt; 1001 =&gt; -6
+</code></pre>
+
+<h2 id="补码表示">补码表示</h2>
+
+<p>补码在反码的基础＋1，其实就是 负整数(补码) ＝ 正整数(反码)＋1。 (注意丢弃溢出位)</p>
+
+<p>或者说 负整数(补码) ＝ 正整数按位取反 ＋ 1, (注意丢弃溢出位)</p>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>补码</td>
+<td>0000</td>
+<td>0001</td>
+<td>0010</td>
+<td>0011</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>-1</th>
+<th>-2</th>
+<th>-3</th>
+<th>-4</th>
+<th>-5</th>
+<th>-6</th>
+<th>-7</th>
+<th>-8</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>补码</td>
+<td>1111</td>
+<td>1110</td>
+<td>1101</td>
+<td>1100</td>
+<td>1011</td>
+<td>1010</td>
+<td>1001</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+
+<p>补码解决了反码中有2个0的问题，成为最合适用来表示整数的表示方式</p>
+
+<pre><code># 1 + (-1)
+0001 + 1111 =&gt; 1,0000(丢弃溢出位) ＝&gt; 0
+# 1 + (-7)
+0001 + 1001 =&gt; 1010 =&gt; -6
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>无论原码，反码还是补码，他们在表示正整数的时候都是一样的，其不同之处在于负整数表示。</p>
+
+<p>而顺着下来看，它们的出现其实就是针对用二进制表示有符号整数这一问题的解决方案的演进。只要了解了这一点，也就不会被它们的弄晕了。</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "username" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

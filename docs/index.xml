@@ -6,10 +6,19 @@
     <description>Recent content on Yonh&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Oct 2018 16:01:05 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Dec 2018 07:06:28 +0000</lastBuildDate>
     
 	<atom:link href="https://yonh.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ffmpeg常用命令记录</title>
+      <link>https://yonh.github.io/docs/posts/ffmpeg-commands/</link>
+      <pubDate>Wed, 12 Dec 2018 07:06:28 +0000</pubDate>
+      
+      <guid>https://yonh.github.io/docs/posts/ffmpeg-commands/</guid>
+      <description>#### m4a转mp3 ffmpeg -i 许巍2018-12-08慕司之夜-深圳站_录音.m4a -acodec libmp3lame -ab 128k output7.mp3 #### 截取音频片段 # -ss开始 -t截取时间 -y 覆盖文件 ffmpeg -y -i 许巍2018-12-08慕司之夜-深圳站_录音.m4a -acodec copy -ss 00:02:11 -t 00:06:10 output.m4a #### 单独提取音频(去掉视频) ffmpeg -i input.mp4 -f mp3 -vn output.mp3 ffmpeg -i input.mp4 -acodec copy -vn output.mp3 #### 单独提取视频(去掉声音) ffmpeg -i input.mp4 -vcodec copy -an output.mp4 #### 获取视频信息输出json格式 ffprobe -v quiet -print_format json -show_format -show_streams 视频.avi #### 淡入淡出 ## m4a总长度是67.5秒，从66秒开始fade out效果1.5秒。 ffmpeg -i output.</description>
+    </item>
     
     <item>
       <title>使用Karabiner将其他键盘配置为类似HHKB的布局</title>
@@ -82,6 +91,19 @@ $-0.789 = -7.89 * 10^{-1}$
 符号，指数和尾数，之所以开始提到科学计数法，原因就在此，浮点数的表示就是基于科学计数法的形式存储
 其占位数(2进制位)分别如下
    类型 符号(S) 指数(E) 尾数(M)     单精度 (float) 1 8 23   双精度 (double) 1 11 52    那么我们可以看到，单精度和双精度的数字在内存中的表示如下 (S符号位 E指数 M尾数)</description>
+    </item>
+    
+    <item>
+      <title>整数的表示，关于原码，反码和补码的思考</title>
+      <link>https://yonh.github.io/docs/posts/about-integer/</link>
+      <pubDate>Tue, 21 Jun 2016 14:00:27 +0000</pubDate>
+      
+      <guid>https://yonh.github.io/docs/posts/about-integer/</guid>
+      <description>整数分为有符号整数和无符号整数,其实就是通常意义下的正整数和负整数。
+为了简单起见，这里的数字使用4位二进制表示，这样数的范围不会太大(这样我就不用列大大的表格啦)。
+无符号整数 无符号整数的表示比较简单，直接将其转换为二进制即可，如
+   数字 0 1 2 3 4 5 6 7     二进制 0000 0001 0010 0011 0100 0101 0110 0111       数字 8 9 10 11 12 13 14 15     二进制 1000 1001 1010 1011 1100 1101 1110 1111    有符号整数 原码表示 原码通过分配一个最高位用于表示数字的正负，其余位数表示数值，相应值如下
+   数字 0 1 2 3 4 5 6 7     原码 0000 0001 0010 0011 0100 0101 0110 0111       数字 -0 -1 -2 -3 -4 -5 -6 -7     原码 1000 1001 1010 1011 1100 1101 1110 1111    虽然原码看起来比较简单，但是其存在2个0，更重要的是使用原码进行加法运算也不会得到正确的结果，不信你看</description>
     </item>
     
     <item>
