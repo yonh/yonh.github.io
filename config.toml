@@ -1,4 +1,4 @@
-baseURL = "https://yonh.github.io/docs/"
+#baseURL = "https://yonh.github.io/docs/"
 languageCode = "en-us"
 title = "Yonh's Blog"
 theme = "minimal-yonh"
@@ -6,6 +6,8 @@ disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 canonifyurls = true
 paginate = 10
+copyright = "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
+
 
 
 [params]
