@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K8s on Yonh&#39;s Blog</title>
+    <link>/k8s/</link>
+    <description>Recent content in K8s on Yonh&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 29 Jun 2019 05:03:35 +0000</lastBuildDate>
+    
+        <atom:link href="/k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用kubedm 安装单节点k8s环境 [国外环境]</title>
+      <link>/k8s/kubeadm-init/</link>
+      <pubDate>Sat, 29 Jun 2019 05:03:35 +0000</pubDate>
+      
+      <guid>/k8s/kubeadm-init/</guid>
+      <description>
+
+&lt;h3 id=&#34;环境及前置操作&#34;&gt;环境及前置操作&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/&#34;&gt;官方文档 - Installing kubeadm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/&#34;&gt;官方文档 - Creating a single control-plane cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;环境&#34;&gt;环境&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu:18.04 1核2G&lt;/li&gt;
+&lt;li&gt;kubenetes v1.15.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;安装kubeadm-docker-kubectl等相关软件&#34;&gt;安装kubeadm,docker,kubectl等相关软件&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 添加google仓库源及安装相关软件
+apt update &amp;amp;&amp;amp; apt install -y apt-transport-https curl
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+cat &amp;lt;&amp;lt;EOF &amp;gt;/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+apt update &amp;amp;&amp;amp; apt install -y kubelet kubeadm kubectl docker.io
+systemctl enable docker.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;kubeadm初始化&#34;&gt;kubeadm初始化&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 初始化
+kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+
+# 复制配置文件
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 安装网络插件
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+
+# 使得master节点也能部署服务
+kubectl taint nodes --all node-role.kubernetes.io/master-
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;测试运行服务&#34;&gt;测试运行服务&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 创建nginx服务
+kubectl create deployment nginx --image=nginx
+kubectl create service nodeport nginx --tcp=80:80
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;辅助命令&#34;&gt;辅助命令&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 查看node
+kubectl get node
+# 查看所有pod状态
+kubectl get pods --all-namespaces
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;问题附录&#34;&gt;问题附录&lt;/h4&gt;
+
+&lt;h5 id=&#34;1-默认cpu核心数量限制的问题&#34;&gt;1.默认cpu核心数量限制的问题&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;kubeadm --ignore-preflight-errors=NumCPU
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;2-docker的默认cgroup驱动不是systemd&#34;&gt;2.docker的默认cgroup驱动不是systemd&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Bash&#34;&gt;cat &amp;gt; /etc/docker/daemon.json &amp;lt;&amp;lt;EOF
+{
+  &amp;quot;exec-opts&amp;quot;: [&amp;quot;native.cgroupdriver=systemd&amp;quot;],
+  &amp;quot;log-driver&amp;quot;: &amp;quot;json-file&amp;quot;,
+  &amp;quot;log-opts&amp;quot;: {
+    &amp;quot;max-size&amp;quot;: &amp;quot;100m&amp;quot;
+  },
+  &amp;quot;storage-driver&amp;quot;: &amp;quot;overlay2&amp;quot;
+}
+EOF
+systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;images=(  # 下面的镜像应该去除&amp;quot;k8s.gcr.io/&amp;quot;的前缀，版本换成上面获取到的版本
+    kube-apiserver:v1.12.1
+    kube-controller-manager:v1.12.1
+    kube-scheduler:v1.12.1
+    kube-proxy:v1.12.1
+    pause:3.1
+    etcd:3.2.24
+    coredns:1.2.2
+)
+
+for imageName in ${images[@]} ; do
+    docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+    docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
+    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+done
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -4,7 +4,7 @@
          
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>When you&#39;re gone chords</title>
+        <title>使用kubedm 安装单节点k8s环境 [国外环境]</title>
         
         <style>
 
@@ -96,7 +96,7 @@ MathJax.Hub.Config({
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">When you&#39;re gone chords</a>
+                    <a class="navbar-brand visible-xs" href="#">使用kubedm 安装单节点k8s环境 [国外环境]</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -148,85 +148,112 @@ MathJax.Hub.Config({
     
     
 
-    <h4><a href="/chords/when_youre_gone_chords/">When you&#39;re gone chords</a></h4>
-    <h5>October 6, 2018</h5>
+    <h4><a href="/k8s/kubeadm-init/">使用kubedm 安装单节点k8s环境 [国外环境]</a></h4>
+    <h5>June 29, 2019</h5>
     
 
 </div>
 
 
-    <br> <div class="text-justify"><p>from <a href="https://tabs.ultimate-guitar.com/tab/the_cranberries/when_youre_gone_chords_143339">wheresbada</a></p>
+    <br> <div class="text-justify">
 
-<pre><code>When You're Gone
-By The Cranberries
-NOTE: Capo in 3rd fret
+<h3 id="环境及前置操作">环境及前置操作</h3>
 
-[Chords used]
-  C   Am  Em  G   F
-e|-0---0---0---3---1|
-B|-1---1---0---0---1|
-G|-0---2---0---0---0|
-D|-2---2---2---0---2|
-A|-3-------2---2---3|
-E|---------0---3----|
+<p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">官方文档 - Installing kubeadm</a></p>
 
-[Intro]
-C             Am               Em                   G
-   Hold on to love that is what I do, now that I've found you
-C            Am                Em                     G
-   And from above everything's stinking, they're not around you
-       C                       Am 
-   And in the night I could be helpless
-              Em                   G
-   I could be lonely, sleeping without you
-       C                       Am
-   And in the day everything's complex
-                  Em                    G
-   There's nothing simple when I'm not around you
+<p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">官方文档 - Creating a single control-plane cluster with kubeadm</a></p>
 
-[Chorus]
-      C                     Am
-But I miss you when you're gone
-            Em   F
-That is what I do, babe, babe, babe
-         C              Am
-And it's going to carry on
-            Em    F
-That is what I knew, babe, babe, babe
+<h4 id="环境">环境</h4>
 
-[Bridge] 
-C|Am|Em|G
+<ul>
+<li>Ubuntu:18.04 1核2G</li>
+<li>kubenetes v1.15.0</li>
+</ul>
 
-[Verse]
-C             Am                  Em                   G
-   Hold on to my hands I feel I'm sinking, sinking without you
-C            Am                Em                     G
-   And to my mind everything's stinking, stinking without you
-       C                       Am 
-   And in the night I could be helpless
-              Em                   G
-   I could be lonely, sleeping without you
-       C                       Am
-   And in the day everything's complex
-                  Em                    G
-   There's nothing simple when I'm not around you
+<h2 id="安装kubeadm-docker-kubectl等相关软件">安装kubeadm,docker,kubectl等相关软件</h2>
 
-[Chorus]
-      C                     Am
-And I miss you when you're gone
-            Em   F
-That is what I do, babe, babe, babe
-         C              Am
-And it's going to carry on
-            Em    F
-That is what I knew, babe, babe, babe
+<pre><code class="language-Bash"># 添加google仓库源及安装相关软件
+apt update &amp;&amp; apt install -y apt-transport-https curl
 
-[Bridge] x2
-C|Am|Em|F| babe, babe, babe
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-[Outro]
-C|Am|Em|F|
-(Fade out)
+cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+apt update &amp;&amp; apt install -y kubelet kubeadm kubectl docker.io
+systemctl enable docker.service
+</code></pre>
+
+<h2 id="kubeadm初始化">kubeadm初始化</h2>
+
+<pre><code class="language-Bash"># 初始化
+kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+
+# 复制配置文件
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 安装网络插件
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+
+# 使得master节点也能部署服务
+kubectl taint nodes --all node-role.kubernetes.io/master-
+</code></pre>
+
+<h2 id="测试运行服务">测试运行服务</h2>
+
+<pre><code class="language-Bash"># 创建nginx服务
+kubectl create deployment nginx --image=nginx
+kubectl create service nodeport nginx --tcp=80:80
+</code></pre>
+
+<h2 id="辅助命令">辅助命令</h2>
+
+<pre><code class="language-Bash"># 查看node
+kubectl get node
+# 查看所有pod状态
+kubectl get pods --all-namespaces
+</code></pre>
+
+<h4 id="问题附录">问题附录</h4>
+
+<h5 id="1-默认cpu核心数量限制的问题">1.默认cpu核心数量限制的问题</h5>
+
+<pre><code class="language-Bash">kubeadm --ignore-preflight-errors=NumCPU
+</code></pre>
+
+<h5 id="2-docker的默认cgroup驱动不是systemd">2.docker的默认cgroup驱动不是systemd</h5>
+
+<pre><code class="language-Bash">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF
+{
+  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;100m&quot;
+  },
+  &quot;storage-driver&quot;: &quot;overlay2&quot;
+}
+EOF
+systemctl restart docker
+</code></pre>
+
+<pre><code class="language-bash">images=(  # 下面的镜像应该去除&quot;k8s.gcr.io/&quot;的前缀，版本换成上面获取到的版本
+    kube-apiserver:v1.12.1
+    kube-controller-manager:v1.12.1
+    kube-scheduler:v1.12.1
+    kube-proxy:v1.12.1
+    pause:3.1
+    etcd:3.2.24
+    coredns:1.2.2
+)
+
+for imageName in ${images[@]} ; do
+    docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+    docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
+    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+done
 </code></pre>
 </div>
 

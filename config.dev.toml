@@ -1,14 +1,11 @@
-#baseURL = "https://yonh.github.io/docs/"
-baseURL = "/"
+baseURL = "http://localhost:1313/docs/"
 languageCode = "en-us"
 title = "Yonh's Blog"
-theme = "minimal-yonh"
+theme = "minimal"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 canonifyurls = true
 paginate = 10
-copyright = "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
-
 
 
 [params]
@@ -31,20 +28,14 @@ copyright = "This work is licensed under a Creative Commons Attribution-ShareAli
 
 
 [[menu.main]]
-    url = "/posts/"
+    url = "/post/"
     name = "Posts"
     weight = 2
 
 [[menu.main]]
-    url = "/k8s/"
-    name = "Kubernetes"
-    weight = 3
-
-
-[[menu.main]]
     url = "/chords/"
     name = "Chords"
-    weight = 4
+    weight = 3
 
 
 
