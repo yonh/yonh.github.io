@@ -42,7 +42,9 @@ draft: false
 
 
 
-![](images/000.jpg)
+![kubeadm-init-cn/000.jpg](/k8s/kubeadm-init-cn/000.jpg)
+
+
 
 
 
@@ -168,7 +170,7 @@ kubeadm init --apiserver-advertise-address=192.168.100.10 --image-repository=hub
 
 下面长长的`kubeadm join`命令就是在`node节点`用来加入集群的操作
 
-![001](images/001.png)
+![001](/k8s/kubeadm-init-cn/001.png)
 
 
 
@@ -205,15 +207,15 @@ kubeadm join 192.168.100.10:6443 --token o95w4x.tw5i6kcwmanq3r6b \
 
 现在执行`kubectl get node`可以看到2个节点都是NotReady状态
 
-![](images/002.png)
+![](/k8s/kubeadm-init-cn/002.png)
 
 如果没问题，等待一会儿就会好的，就像这样
 
-![](images/003.png)
+![](/k8s/kubeadm-init-cn/003.png)
 
 在此过程中，可以使用命令`kubectl get pod --all-namespaces`查看容器状态
 
-![](images/004.png)
+![](/k8s/kubeadm-init-cn/004.png)
 
 
 
@@ -225,7 +227,7 @@ kubectl create deployment nginx --image=nginx
 kubectl create service nodeport nginx --tcp=80:80
 ```
 
-![](images/005.png)
+![](/k8s/kubeadm-init-cn/005.png)
 
 
 
