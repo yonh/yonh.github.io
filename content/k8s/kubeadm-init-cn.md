@@ -1,6 +1,6 @@
 ---
 title: "使用kubedm安装双节点k8s集群 [国内环境]"
-date: 2019-07-15T01:03:35Z
+date: 2019-07-15T01:03:35+08:00
 draft: false
 ---
 
@@ -18,8 +18,6 @@ draft: false
 
 
 
-
-
 #### 环境
 
 * Ubuntu:18.04 2核2G master
@@ -34,17 +32,15 @@ draft: false
 
 #### 文章视频
 
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/q71aee6ul1E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-
-
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/q71aee6ul1E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
 ## 整体安装过程示意图
 
 [图片原文档下载](/k8s/init-k8s-in-china.drawio)
+
+
 
 ![](images/000.jpg)
 

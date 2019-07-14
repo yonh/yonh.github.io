@@ -1,6 +1,6 @@
 ---
 title: "使用kubedm 安装单节点k8s环境 [国外环境]"
-date: 2019-07-15T00:49:35Z
+date: 2019-06-29T05:03:35Z
 draft: false
 ---
 
@@ -22,7 +22,7 @@ draft: false
 
 #### 视频
 
-<iframe src="//player.bilibili.com/player.html?aid=57324712&cid=100081870&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width="100%" height=600 src="//player.bilibili.com/player.html?aid=57324712&cid=100081870&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 
 
