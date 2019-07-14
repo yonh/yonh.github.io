@@ -14,6 +14,8 @@ draft: false
 
 [同步Kubernetes Ubuntu包代码](https://github.com/yonh/k8s_package_sync)
 
+镜像仓库: [DockerHub](https://hub.docker.com/u/yonh), [网易云](https://c.163yun.com/hub#/m/user/?name=yonh92)
+
 
 
 
@@ -32,7 +34,7 @@ draft: false
 
 #### 文章视频
 
-<object width="100%" height="500"><param name="movie" value="https://youtu.be/q71aee6ul1E"></param><param name="allowFullScreen" value="true"></param><embed src="https://youtu.be/q71aee6ul1E" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/q71aee6ul1E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -42,7 +44,9 @@ draft: false
 
 ## 整体安装过程示意图
 
-[图片原文档下载](init-k8s-in-china.drawio)
+[图片原文档下载](/k8s/init-k8s-in-china.drawio)
+
+<a href="/k8s/init-k8s-in-china.drawio" download>Click to Download</a>
 
 ![](images/000.jpg)
 
