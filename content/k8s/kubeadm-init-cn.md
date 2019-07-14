@@ -1,6 +1,6 @@
 ---
 title: "使用kubedm安装双节点k8s集群 [国内环境]"
-date: 2019-06-29T05:03:35Z
+date: 2019-07-15T01:03:35Z
 draft: false
 ---
 
@@ -45,8 +45,6 @@ draft: false
 ## 整体安装过程示意图
 
 [图片原文档下载](/k8s/init-k8s-in-china.drawio)
-
-<a href="/k8s/init-k8s-in-china.drawio" download>Click to Download</a>
 
 ![](images/000.jpg)
 
