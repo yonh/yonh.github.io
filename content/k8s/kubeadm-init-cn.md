@@ -10,6 +10,8 @@ draft: false
 
 [官方文档 - Creating a single control-plane cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
+[kubeadm init](https://k8smeetup.github.io/docs/reference/setup-tools/kubeadm/kubeadm-init/)
+
 [同步K8S镜像代码](https://github.com/yonh/sync_k8s_docker_images)
 
 [同步Kubernetes Ubuntu包代码](https://github.com/yonh/k8s_package_sync)
@@ -144,7 +146,13 @@ systemctl enable docker.service
 
 ## kubeadm初始化
 
-由于我这里同步了k8s的软件包，你可以直接直接配置参数`repository=hub.c.163.com/yonh92`来使用我同步的镜像，当然你也可以自己同步镜像，我这里写了同步脚本 https://github.com/yonh/sync_k8s_docker_images
+由于我这里已经同步了k8s的镜像，你可以直接直接配置参数
+
+`image-repository=hub.c.163.com/yonh92` 或 `image-repository=docker.io/yonh`
+
+来使用我同步的镜像，当然你也可以自己同步镜像，我这里写了同步脚本
+
+https://github.com/yonh/sync_k8s_docker_images
 
 ```Bash
 # 以下命令在Master节点执行
