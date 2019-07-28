@@ -4,7 +4,7 @@ date: 2019-07-15T01:03:35+08:00
 draft: false
 ---
 
-### 环境及前置操作
+### 参考文章
 
 [官方文档 - Installing kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
@@ -26,7 +26,7 @@ draft: false
 * Ubuntu:18.04 2核2G node
 * kubenetes v1.15.0
 * Virtualbox + Vagrant
-* Kubernetes: v1.5.0
+* Kubernetes: v1.15.0
 * Kubernetes网络组件: flannel
 
 
