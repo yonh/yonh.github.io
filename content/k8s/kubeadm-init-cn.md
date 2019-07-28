@@ -184,7 +184,18 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 安装网络插件
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+# 下载网络插件配置文件
+wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+# 修改配置文件, flannel 启动项添加 --iface=--enp0s8
+# 找到下面的配置(amd64), 在args配置像后面添加 - --iface=--enp0s8
+#- name: kube-flannel
+#  image: quay.io/coreos/flannel:v0.11.0-amd64
+#  command:
+#  - /opt/bin/flanneld
+#  args:
+#  - --ip-masq
+#  - --kube-subnet-mgr
 
 
 # 使得master节点也能部署服务 [可选]
