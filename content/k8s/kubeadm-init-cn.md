@@ -93,6 +93,9 @@ Vagrant.configure("2") do |config|
         vb.name = machine[:hostname]
         vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
       end
+      node.vm.provision "shell", inline: <<-SHELL
+        echo "root:root" | chpasswd
+      SHELL
     end
   end
 end
