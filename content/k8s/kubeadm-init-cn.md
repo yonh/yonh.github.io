@@ -24,9 +24,8 @@ draft: false
 
 * Ubuntu:18.04 2核2G master
 * Ubuntu:18.04 2核2G node
-* kubenetes v1.15.0
 * Virtualbox + Vagrant
-* Kubernetes: v1.15.0
+* Kubernetes: v1.15.1
 * Kubernetes网络组件: flannel
 
 
@@ -40,11 +39,11 @@ draft: false
 
 ## 整体安装过程示意图
 
-[图片原文档下载](/k8s/init-k8s-in-china.drawio)
+[图片原文档下载](/k8s/kubeadm-init-cn/init-k8s-in-china.drawio)
 
 
 
-![kubeadm-init-cn/000.jpg](/k8s/kubeadm-init-cn/000.jpg)
+![kubeadm-init-cn/000.jpg](/k8s/kubeadm-init-cn/000.png)
 
 
 
@@ -168,10 +167,10 @@ kubeadm init \
 	--apiserver-advertise-address=192.168.100.10 \
 	--image-repository=docker.io/yonh \
 	--pod-network-cidr=10.244.0.0/16 \
-	----kubernetes-version=v1.15.1
+	--kubernetes-version=v1.15.1
 # --apiserver-advertise-address=192.168.100.10
 # 配置apiserver地址,这个地址跟随你的master节点而定
-# --image-repository=hub.c.163.com/yonh92
+# --image-repository=docker.io/yonh
 # 配置镜像仓库地址，因为我们访问不了k8s.gcr.io, kubeadm提供了设置镜像仓库地址，所以我们可以使用此参数绕过它，不从k8s.gcr.io下载，从我们配置的仓库地址下载
 # --pod-network-cidr=10.244.0.0/16
 # 我们的网络插件选择flannel，根据flannel的要求配置的，没什么好说的
