@@ -161,7 +161,11 @@ https://github.com/yonh/sync_k8s_docker_images
 # kubeadm config images list
 
 # 初始化
-kubeadm init --apiserver-advertise-address=192.168.100.10 --image-repository=hub.c.163.com/yonh92 --pod-network-cidr=10.244.0.0/16
+kubeadm init \
+	--apiserver-advertise-address=192.168.100.10 \
+	--image-repository=docker.io/yonh \
+	--pod-network-cidr=10.244.0.0/16 \
+	----kubernetes-version=v1.15.1
 # --apiserver-advertise-address=192.168.100.10
 # 配置apiserver地址,这个地址跟随你的master节点而定
 # --image-repository=hub.c.163.com/yonh92
@@ -196,7 +200,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 # 下载网络插件配置文件
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 # 修改配置文件, flannel 启动项添加 --iface=--enp0s8
-# 找到下面的配置(amd64), 在args配置像后面添加 - --iface=--enp0s8
+# 找到下面的配置(amd64), 在args配置像后面添加 - --iface=enp0s8
 #- name: kube-flannel
 #  image: quay.io/coreos/flannel:v0.11.0-amd64
 #  command:
