@@ -174,6 +174,8 @@ kubeadm init \
 # 配置镜像仓库地址，因为我们访问不了k8s.gcr.io, kubeadm提供了设置镜像仓库地址，所以我们可以使用此参数绕过它，不从k8s.gcr.io下载，从我们配置的仓库地址下载
 # --pod-network-cidr=10.244.0.0/16
 # 我们的网络插件选择flannel，根据flannel的要求配置的，没什么好说的
+# --kubernetes-version=v1.15.1
+# k8s版本
 ```
 
 
@@ -198,10 +200,10 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 安装网络插件
-# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 # 下载网络插件配置文件
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-# 修改配置文件, flannel 启动项添加 --iface=--enp0s8
+# 修改配置文件, flannel 启动项添加 --iface=enp0s8
 # 找到下面的配置(amd64), 在args配置像后面添加 - --iface=enp0s8
 #- name: kube-flannel
 #  image: quay.io/coreos/flannel:v0.11.0-amd64
@@ -211,6 +213,7 @@ wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-
 #  - --ip-masq
 #  - --kube-subnet-mgr
 
+kubectl apply -f kube-flannel.yml
 
 # 使得master节点也能部署服务 [可选]
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -269,6 +272,9 @@ kubectl get pods --all-namespaces
 kubeadm config images list
 # 查看所有pod及其相应的节点
 kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
+
+# docker load 加载当前目录所有文件
+ls |grep img|awk '{print "docker load < " $1}' |xargs -L 1 -I {} sh -c "{}"
 ````
 
 
