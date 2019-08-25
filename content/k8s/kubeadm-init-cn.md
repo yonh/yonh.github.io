@@ -148,13 +148,9 @@ systemctl enable docker.service
 
 ## kubeadm初始化
 
-由于我这里已经同步了k8s的镜像，你可以直接直接配置参数
+初始化这边我们使用微软这边同步的镜像库`gcr.azk8s.cn/google_containers`
 
-`image-repository=hub.c.163.com/yonh92` 或 `image-repository=docker.io/yonh`
-
-来使用我同步的镜像，当然你也可以自己同步镜像，我这里写了同步脚本
-
-https://github.com/yonh/sync_k8s_docker_images
+当然你也可以使用我同步在`docker hub`上的镜像`image-repository=docker.io/yonh`
 
 ```Bash
 # 以下命令在Master节点执行
@@ -165,12 +161,12 @@ https://github.com/yonh/sync_k8s_docker_images
 # 初始化
 kubeadm init \
 	--apiserver-advertise-address=192.168.100.10 \
-	--image-repository=docker.io/yonh \
+	--image-repository=gcr.azk8s.cn/google_containers \
 	--pod-network-cidr=10.244.0.0/16 \
 	--kubernetes-version=v1.15.1
 # --apiserver-advertise-address=192.168.100.10
 # 配置apiserver地址,这个地址跟随你的master节点而定
-# --image-repository=docker.io/yonh
+# --image-repository=gcr.azk8s.cn/google_containers
 # 配置镜像仓库地址，因为我们访问不了k8s.gcr.io, kubeadm提供了设置镜像仓库地址，所以我们可以使用此参数绕过它，不从k8s.gcr.io下载，从我们配置的仓库地址下载
 # --pod-network-cidr=10.244.0.0/16
 # 我们的网络插件选择flannel，根据flannel的要求配置的，没什么好说的
