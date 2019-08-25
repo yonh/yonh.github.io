@@ -16,7 +16,7 @@ draft: false
 
 [同步Kubernetes Ubuntu包代码](https://github.com/yonh/k8s_package_sync)
 
-镜像仓库: [DockerHub](https://hub.docker.com/u/yonh), [网易云](https://c.163yun.com/hub#/m/user/?name=yonh92)
+镜像仓库: [DockerHub](https://hub.docker.com/u/yonh), [微软同步仓库](http://mirror.azure.cn/help/gcr-proxy-cache.html)
 
 
 
