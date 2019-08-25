@@ -247,7 +247,7 @@ kubeadm join 192.168.100.10:6443 --token o95w4x.tw5i6kcwmanq3r6b \
 
 ```Bash
 # 创建nginx服务
-kubectl create deployment nginx --image=nginx
+kubectl create deployment nginx --image=nginx:alpine
 kubectl create service nodeport nginx --tcp=80:80
 ```
 
