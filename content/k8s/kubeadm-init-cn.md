@@ -25,7 +25,7 @@ draft: false
 * Ubuntu:18.04 2核2G master
 * Ubuntu:18.04 2核2G node
 * Virtualbox + Vagrant
-* Kubernetes: v1.15.1
+* Kubernetes: v1.15.3
 * Kubernetes网络组件: flannel
 
 
@@ -163,14 +163,14 @@ kubeadm init \
 	--apiserver-advertise-address=192.168.100.10 \
 	--image-repository=gcr.azk8s.cn/google_containers \
 	--pod-network-cidr=10.244.0.0/16 \
-	--kubernetes-version=v1.15.1
+	--kubernetes-version=v1.15.3
 # --apiserver-advertise-address=192.168.100.10
 # 配置apiserver地址,这个地址跟随你的master节点而定
 # --image-repository=gcr.azk8s.cn/google_containers
 # 配置镜像仓库地址，因为我们访问不了k8s.gcr.io, kubeadm提供了设置镜像仓库地址，所以我们可以使用此参数绕过它，不从k8s.gcr.io下载，从我们配置的仓库地址下载
 # --pod-network-cidr=10.244.0.0/16
 # 我们的网络插件选择flannel，根据flannel的要求配置的，没什么好说的
-# --kubernetes-version=v1.15.1
+# --kubernetes-version=v1.15.3
 # k8s版本
 ```
 
@@ -195,25 +195,52 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-# 安装网络插件
+# 使得master节点也能部署服务 [可选]
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
+
+
+####  安装网络插件
+
+我们需要修改插件配置
+
+1. 设置默认网卡
+2. 修改镜像为`Azure`同步的镜像（只是为了加快下载速度，官方的下载太慢）
+
+```Bash
 # kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 # 下载网络插件配置文件
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 # 修改配置文件, flannel 启动项添加 --iface=enp0s8
 # 找到下面的配置(amd64), 在args配置像后面添加 - --iface=enp0s8
-#- name: kube-flannel
-#  image: quay.io/coreos/flannel:v0.11.0-amd64
-#  command:
-#  - /opt/bin/flanneld
-#  args:
-#  - --ip-masq
-#  - --kube-subnet-mgr
+# 同时修改镜像名字为 quay.azk8s.cn/coreos/flannel:v0.11.0-amd64
+
+##### 更改之前
+- name: kube-flannel
+  image: quay.io/coreos/flannel:v0.11.0-amd64
+  command:
+  - /opt/bin/flanneld
+  args:
+  - --ip-masq
+  - --kube-subnet-mgr
+
+##### 更改之后
+- name: kube-flannel
+  image: quay.azk8s.cn/coreos/flannel:v0.11.0-amd64
+  command:
+  - /opt/bin/flanneld
+  args:
+  - --ip-masq
+  - --kube-subnet-mgr
+  - --iface=enp0s8
 
 kubectl apply -f kube-flannel.yml
-
-# 使得master节点也能部署服务 [可选]
-kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
+
+
+
+
 
 
 
