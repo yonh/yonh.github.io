@@ -11,7 +11,7 @@ body {
 
 main {
     margin: auto;
-    padding: 25px;
+    padding: 5px;
     flex: 1 0 auto;
     max-width: 750px;
 }
@@ -23,6 +23,14 @@ main pre {
 
 .copyright {
     margin: 15px 0;
+}
+
+.h1, h1 {
+    font-size: 35px !important;
+}
+main h4, main h5, main h6 {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 /*home page*/
@@ -74,7 +82,7 @@ a:hover {
 /*list item for posts and projects*/
 
 .item {
-    padding: 10px 0;
+    padding: 5px 0;
 }
 
 .item-tag {

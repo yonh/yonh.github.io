@@ -2,8 +2,46 @@
 
 <main>
 
-    {{ partial "list-item" . }}
+    <!-- {{ partial "list-item" . }} -->
 
+    <h1>{{ .Title }}</h1>
+    <!-- Created Date -->
+{{- $pubdate := .PublishDate.Format "January 2, 2006" }}
+Created: 
+<time datetime="{{ .PublishDate }}" title="{{ .PublishDate }}" style="font-weight: bold;">
+    {{ $pubdate }}
+</time>
+
+<!-- Last Updated Date -->
+{{- if .Lastmod }}
+    {{- $lastmod := .Lastmod.Format "January 2, 2006" }}
+    {{- if ne $lastmod $pubdate }}
+        <!-- <div class="post-info-last-mod"> -->
+            , Updated: 
+            <time datetime="{{ .Lastmod }}" title="{{ .Lastmod }}" style="font-weight: bold;">
+                {{ $lastmod }}
+            </time>
+        <!-- </div> -->
+    {{- end }}
+{{- end }}
+
+<!--
+{{ $postgitinfo := .Data }} 
+
+<pre>{{ .GitInfo | jsonify  }}</pre>
+
+{{- if .GitInfo }}
+  <p style="font-size: small; color: grey;">Last commit: {{ .GitInfo.AbbreviatedHash }} {{.GitInfo.CommitDate}}</p>
+{{- end }}
+
+{{ with .GitInfo }}
+  <p style="font-size: small; color: grey;">Page version: {{ .AbbreviatedHash }} {{ .CommitDate.Format "2006-01-02"}}</p>
+{{- end }}
+-->
+
+
+{{ (print "<!-- LATEST GIT UPDATE: " $postgitinfo " -->") | safeHTML }}
+    <hr>
     <br> <div class="text-justify">{{ .Content }}</div>
 
     <!-- related posts with the same tags -->

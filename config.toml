@@ -6,9 +6,10 @@ theme = "minimal-yonh"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 canonifyurls = true
-paginate = 10
+paginate = 15
 copyright = "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
 
+enableGitInfo = true
 
 
 [params]
@@ -23,6 +24,16 @@ copyright = "This work is licensed under a Creative Commons Attribution-ShareAli
     highlightStyle = "solarized-light"
     #highlightStyle = "solarized-dark"
     highlightLanguages = ["go", "haskell", "kotlin", "scala", "swift", "java", "php", "ruby", "lisp"]
+
+# [frontmatter]
+#  lastmod = ["lastmod", ":git", "date", "publishDate"]
+
+[frontmatter]
+  date = ['date', 'publishDate', 'lastmod']
+  expiryDate = ['expiryDate']
+  lastmod = ['lastmod',':git', 'date', 'publishDate']
+  publishDate = ['publishDate', 'date']
+
 
 [[menu.main]]
     url = "/"
